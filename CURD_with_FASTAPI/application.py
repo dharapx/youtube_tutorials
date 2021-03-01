@@ -1,3 +1,9 @@
+#  Date: 2021.03.01
+#  Author: dharapx
+#  Feel free to use this code
+#  ------------------------------------------------------------------------------------------------
+# This is an API. which are having four end points to perform the CRUD operation with SQLite
+#  ------------------------------------------------------------------------------------------------
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -10,6 +16,7 @@ from db_handler import SessionLocal, engine
 
 model.Base.metadata.create_all(bind=engine)
 
+# initiating app
 app = FastAPI(
     title="Movie Details",
     description="You can perform CRUD operation by using this API",
@@ -44,7 +51,7 @@ def add_new_movie(movie: schema.MovieAdd, db: Session = Depends(get_db)):
 def delete_movie_by_id(sl_id: int, db: Session = Depends(get_db)):
     details = crud.get_movie_by_id(db=db, sl_id=sl_id)
     if not details:
-        raise HTTPException(status_code=400, detail=f"No record found to delete")
+        raise HTTPException(status_code=404, detail=f"No record found to delete")
 
     try:
         crud.delete_movie_details_by_id(db=db, sl_id=sl_id)
@@ -57,6 +64,6 @@ def delete_movie_by_id(sl_id: int, db: Session = Depends(get_db)):
 def update_movie_details(sl_id: int, update_param: schema.UpdateMovie, db: Session = Depends(get_db)):
     details = crud.get_movie_by_id(db=db, sl_id=sl_id)
     if not details:
-        raise HTTPException(status_code=400, detail=f"No record found to update")
+        raise HTTPException(status_code=404, detail=f"No record found to update")
 
     return crud.update_movie_details(db=db, details=update_param, sl_id=sl_id)

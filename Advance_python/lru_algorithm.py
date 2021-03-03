@@ -1,6 +1,7 @@
 #  Date: 3/3/21, 12:54 PM
 #  Author: dharapx
 #  Feel free to use this code
+
 import time
 from functools import lru_cache
 
@@ -13,6 +14,9 @@ and no entries will be ever evicted.
 
 @lru_cache(maxsize=16)
 def fibinacci_series(n):
+    '''
+    computing fibinacci_series for given number
+    '''
     if n <= 1:
         return n
     else:

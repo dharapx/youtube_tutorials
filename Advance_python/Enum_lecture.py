@@ -26,6 +26,7 @@ if __name__ == "__main__":
     print(Jubilee(25))
     print(dir(Jubilee))
 
+    # Aother way to create
     # you can use space separated string, list or tuple with Enum class without extending.
     # And value will be auto incremented starting from 1.
     ses = Enum('Season', 'summer monsoon winter')
